@@ -12,7 +12,7 @@ public class MainController {
     public ModelAndView goPage() {
 
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
+        mv.setViewName("views/main/index");
         return mv;
     }
 }

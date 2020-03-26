@@ -30,4 +30,12 @@ public class LoginController {
         mv.setViewName("views/login/forgot");
         return mv;
     }
+
+    @RequestMapping(value = "/reset", method = RequestMethod.GET)
+    public ModelAndView goReset() {
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("views/login/reset");
+        return mv;
+    }
 }

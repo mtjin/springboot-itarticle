@@ -3,20 +3,20 @@ package com.mtjin.itarticle;
 import com.mtjin.itarticle.domain.entity.UserEntity;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class UserDto {
     private long id;
+    private String name;
     private String email;
     private String password;
 
     public UserEntity toEntity() {
         UserEntity boardEntity = UserEntity.builder()
                 .id(id)
+                .name(name)
                 .email(email)
                 .password(password)
                 .build();
@@ -24,8 +24,9 @@ public class UserDto {
     }
 
     @Builder
-    public UserDto(long id, String email, String password, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public UserDto(long id, String name, String email, String password) {
         this.id = id;
+        this.name = name;
         this.email = email;
         this.password = password;
     }

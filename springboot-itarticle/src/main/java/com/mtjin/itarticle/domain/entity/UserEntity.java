@@ -11,11 +11,14 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "user")
-public class UserEntity extends TimeEntity {
+public class UserEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 20, nullable = false)
+    private String name;
 
     @Column(length = 20, nullable = false)
     private String email;
@@ -24,8 +27,9 @@ public class UserEntity extends TimeEntity {
     private String password;
 
     @Builder
-    public UserEntity(Long id, String email, String password) {
+    public UserEntity(Long id,String name, String email, String password) {
         this.id = id;
+        this.name = name;
         this.email = email;
         this.password = password;
     }

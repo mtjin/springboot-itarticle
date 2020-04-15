@@ -19,10 +19,10 @@
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">Register</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
+							<form method="POST" th:action="@{/do_register}" th:object="${userDto}"  class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="name">Name</label>
-									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<input th:name="name" id="name" type="text" class="form-control" name="name" required autofocus>
 									<div class="invalid-feedback">
 										What's your name?
 									</div>
@@ -30,7 +30,7 @@
 
 								<div class="form-group">
 									<label for="email">E-Mail Address</label>
-									<input id="email" type="email" class="form-control" name="email" required>
+									<input th:name="email" id="email" type="email" class="form-control" name="email" required>
 									<div class="invalid-feedback">
 										Your email is invalid
 									</div>
@@ -38,7 +38,7 @@
 
 								<div class="form-group">
 									<label for="password">Password</label>
-									<input id="password" type="password" class="form-control" name="password" required data-eye>
+									<input th:name="password" id="password" type="password" class="form-control" name="password" required data-eye>
 									<div class="invalid-feedback">
 										Password is required
 									</div>

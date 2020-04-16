@@ -13,7 +13,18 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional
-    public Long saveUser(UserDto userDto){
+    public Long saveUser(UserDto userDto) {
         return userRepository.save(userDto.toEntity()).getId();
     }
+
+    @Transactional
+    public boolean isExistEmail(UserDto userDto) {
+        return !userRepository.findUserEntityByEmail(userDto.toEntity().getEmail()).isEmpty();
+    }
+
+    @Transactional
+    public boolean isExistName(UserDto userDto) {
+        return !userRepository.findUserEntityByName(userDto.toEntity().getName()).isEmpty();
+    }
+
 }

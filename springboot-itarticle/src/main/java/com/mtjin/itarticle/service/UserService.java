@@ -1,6 +1,7 @@
 package com.mtjin.itarticle.service;
 
 import com.mtjin.itarticle.UserDto;
+import com.mtjin.itarticle.domain.entity.UserEntity;
 import com.mtjin.itarticle.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,11 @@ public class UserService {
     @Transactional
     public boolean isExistName(UserDto userDto) {
         return !userRepository.findUserEntityByName(userDto.toEntity().getName()).isEmpty();
+    }
+
+    @Transactional
+    public UserEntity login(UserDto userDto) {
+        return userRepository.findUserEntityByEmailAndPassword(userDto.toEntity().getEmail(), userDto.toEntity().getPassword());
     }
 
 }

@@ -6,10 +6,7 @@ import com.mtjin.itarticle.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,22 +20,16 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView goLogin(HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("views/login/login");
-        return mv;
+    @GetMapping("/login")
+    public String goLogin(HttpServletRequest request) {
+        return "views/login/login";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/do_login", method = RequestMethod.POST)
-    public Map<String, String> doLogin(@ModelAttribute(name = "userDto") UserDto userDto) {
-        System.out.println("asdasdsadsa");
-        System.out.println(userDto.toString());
+    @PostMapping("/do_login")
+    public @ResponseBody Map<String, String> doLogin(@ModelAttribute(name = "userDto") UserDto userDto) {
         Map<String, String> map = new HashMap<>();
         try {
             UserEntity user = userService.login(userDto);
-            System.out.println(user);
             if (user == null) {
                 map.put("success", "false");
             } else {
@@ -51,9 +42,8 @@ public class LoginController {
     }
 
     //Map 형태 ResponseBody 어노테이션 필요 객체 Body로 받아야함
-    @ResponseBody
-    @RequestMapping(value = "/do_register", method = RequestMethod.POST)
-    public Map<String, String> doRegister(@ModelAttribute(name = "userDto") UserDto userDto) {
+    @PostMapping("/do_register")
+    public @ResponseBody Map<String, String> doRegister(@ModelAttribute(name = "userDto") UserDto userDto) {
         System.out.println(userDto.toString());
         Map<String, String> map = new HashMap<>();
         try {
@@ -75,28 +65,18 @@ public class LoginController {
         return map;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ModelAndView goRegister() {
-
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("views/login/register");
-        return mv;
+    @GetMapping(value = "/register")
+    public String goRegister() {
+        return "views/login/register";
     }
 
-    @RequestMapping(value = "/forgot", method = RequestMethod.GET)
-    public ModelAndView goForgot() {
-
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("views/login/forgot");
-        return mv;
+    @GetMapping("/forgot")
+    public String goForgot() {
+        return "views/login/forgot";
     }
 
-    @RequestMapping(value = "/reset", method = RequestMethod.GET)
-    public ModelAndView goReset() {
-
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("views/login/reset");
-        return mv;
+    @GetMapping("/reset")
+    public String goReset() {
+        return "views/login/reset";
     }
 }
